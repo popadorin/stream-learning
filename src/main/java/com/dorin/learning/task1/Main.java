@@ -2,7 +2,6 @@ package com.dorin.learning.task1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,14 +17,13 @@ public class Main {
     }
 
     private static Number computeAverage(List<Number> numbers) {
-        List<Number> positiveOnes = numbers.stream()
+        Number sum = numbers.stream()
                 .filter(element -> (int)element > 0)
-                .collect(Collectors.toList());
+                .reduce((first, second) -> (int)first + (int)second).get();
 
-        Number sum = positiveOnes.stream()
-                .reduce((first, second) -> (int)first + (int)second)
-                .get();
+        long numberOfPositiveNumbers = numbers.stream()
+                .filter(number -> (int)number > 0).count();
 
-        return (double)sum.intValue() / positiveOnes.size();
+        return (double)sum.intValue() / numberOfPositiveNumbers;
     }
 }
