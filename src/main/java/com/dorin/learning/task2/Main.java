@@ -2,6 +2,7 @@ package com.dorin.learning.task2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -14,11 +15,18 @@ public class Main {
 
         List<String> names = studentNames(students);
         names.forEach(System.out::println);
+
+        OptionalInt getMaximumAge = getMaximumAge(students);
+        System.out.println(getMaximumAge);
     }
 
     private static List<String> studentNames(List<Student> students) {
         return students.stream()
                 .map(Student::getName)
                 .collect(Collectors.toList());
+    }
+
+    private static OptionalInt getMaximumAge(List<Student> students) {
+        return students.stream().mapToInt(Student::getAge).max();
     }
 }
