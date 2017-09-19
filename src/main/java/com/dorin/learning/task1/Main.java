@@ -14,20 +14,20 @@ public class Main {
         numbers.add(-21);
         numbers.add(15);
 
-        Number average = computeAverage(numbers);
-        if (average.equals(0)) {
+        OptionalDouble average = computeAverage(numbers);
+        if (!average.isPresent()) {
             System.out.println("Some problems in the computeAverage method");
         } else {
-            System.out.println(average);
+            System.out.println(average.getAsDouble());
         }
     }
 
-    private static Number computeAverage(List<Number> numbers) {
+    private static OptionalDouble computeAverage(List<Number> numbers) {
         OptionalDouble average = numbers.stream()
                 .filter(number -> (int)number > 0)
                 .mapToInt(a -> (int)a)
                 .average();
 
-        return average.isPresent() ? average.getAsDouble() : 0;
+        return average;
     }
 }
