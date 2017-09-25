@@ -2,6 +2,7 @@ package com.dorin.learning.task2;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,6 +41,15 @@ public class Main {
 
         List<Course> courses = getCourses(students);
         courses.forEach(System.out::println);
+
+        System.out.println("_____________________________");
+        List<String> ll = new ArrayList<>();
+        List<String> mylist = new ArrayList<>();
+        mylist.add("Jora");
+        mylist.add("Ghena");
+        for (String element : mylist) {
+
+        }
     }
 
     private static List<String> studentNames(List<Student> students) {
@@ -61,9 +71,20 @@ public class Main {
             }
         }
 
-        Set<Course> uniqueCourses = new HashSet<>(courses);
-        List<Course> ll = new ArrayList<>(uniqueCourses);
 
-        return ll;
+
+        Stream<List<Course>> listStream = students.stream()
+                .map(student -> student.getCourses());
+
+        System.out.println("................................");
+        listStream.forEach(System.out::println);
+        System.out.println("................................");
+
+
+
+        Set<Course> uniqueCourses = new HashSet<>(courses);
+        List<Course> allCourses = new ArrayList<>(uniqueCourses);
+
+        return allCourses;
     }
 }
